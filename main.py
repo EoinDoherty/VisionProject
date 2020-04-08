@@ -1,32 +1,59 @@
+from os import getcwd
+from sys import exit
 import matplotlib.pyplot as plt
 # from tkinter import Tk # That library is cursed
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushButton, QFileDialog
 from skimage import data
+from skimage.io import imread
 
-def show_image():
-    img = data.astronaut()
-    plt.imshow(img)
-    plt.show()
+class App(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.title = "Image Sorter"
+        self.left = 10
+        self.right = 10
+        self.width = 500
+        self.height = 500
+        self.initUI()
+        self.show()
+        self.image = data.astronaut()
+    
+    def initUI(self):
+        self.layout = QVBoxLayout()
 
-def main():
-    app = QApplication([])
-    window = QWidget()
-    layout = QVBoxLayout()
+        image_button = QPushButton("Show image")
+        image_button.clicked.connect(self.show_image)
+        self.layout.addWidget(image_button)
+        
+        print_button = QPushButton("Print text")
+        print_button.clicked.connect(lambda : print("clicked button"))
+        self.layout.addWidget(print_button)
 
-    image_button = QPushButton("Show image")
-    image_button.clicked.connect(show_image)
+        file_nav_button = QPushButton("Select Image")
+        file_nav_button.clicked.connect(self.file_nav)
+        self.layout.addWidget(file_nav_button)
 
-    layout.addWidget(image_button)
+        self.setLayout(self.layout)
+    
+    def show_image(self):
+        plt.imshow(self.image)
+        plt.show()
+    
+    def file_nav(self):
+        # file_dialog = QFileDialog(self)
+        # file_dialog.setViewMode(QFileDialog.Detail)
 
-    text_button = QPushButton("Print text")
-    text_button.clicked.connect(lambda : print("clicked"))
+        # if file_dialog.exec_():
+        #     print(file_dialog.selectedFiles())
 
-    layout.addWidget(text_button)
-
-    window.setLayout(layout)
-    window.show()
-
-    app.exec_()
+        # print(QFileDialog.getOpenFileNames(self, "select files", getcwd()))
+        image_path, _ = QFileDialog.getOpenFileName(self, "Find a file", getcwd(), "Image files (*png *jpg *jpeg)")
+        try:
+            self.image = imread(image_path)
+        except ValueError:
+            pass
 
 if __name__ == "__main__":
-    main()
+    app = QApplication([])
+    ex = App()
+    exit(app.exec_())
