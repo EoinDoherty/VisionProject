@@ -54,6 +54,9 @@ class App(QWidget):
             pass
 
 if __name__ == "__main__":
-    app = QApplication([])
-    ex = App()
-    exit(app.exec_())
+    # app = QApplication([])
+    # ex = App()
+    # exit(app.exec_())
+    from app.visual_similarity.cluster_similar import group_images
+    print("hello")
+    print(group_images("data/"))

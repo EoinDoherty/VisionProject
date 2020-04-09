@@ -130,7 +130,9 @@ dmypy.json
 
 # Image folder
 images/
+data/
 
 # Misc
 .vscode/
 S20_CSCI48305722_FinalProject.pdf
+.DS_Store
