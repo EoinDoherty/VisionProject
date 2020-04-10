@@ -2,11 +2,13 @@ from os import getcwd
 from sys import exit
 import matplotlib.pyplot as plt
 # from tkinter import Tk # That library is cursed
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushButton, QFileDialog
+from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushButton, QFileDialog, QMainWindow
 from skimage import data
 from skimage.io import imread
+from app.visual_similarity.visual_widget import Visual
+from app.grouping_widget import Grouping
 
-class App(QWidget):
+class App(QMainWindow):
     def __init__(self):
         super().__init__()
         self.title = "Image Sorter"
@@ -33,7 +35,18 @@ class App(QWidget):
         file_nav_button.clicked.connect(self.file_nav)
         self.layout.addWidget(file_nav_button)
 
-        self.setLayout(self.layout)
+        visual_grp_button = QPushButton("Group by visual features")
+        visual_grp_button.clicked.connect(self.visual_group)
+        self.layout.addWidget(visual_grp_button)
+
+        test_grp = QPushButton("Debug grouping view")
+        test_grp.clicked.connect(self.test_grp_view)
+        # self.layout.addWidget(test_grp)
+
+        self.central_widget = QWidget()
+        self.central_widget.setLayout(self.layout)
+        self.setCentralWidget(self.central_widget)
+        # self.setCentralWidget(self.layout)
     
     def show_image(self):
         plt.imshow(self.image)
@@ -52,13 +65,15 @@ class App(QWidget):
             self.image = imread(image_path)
         except ValueError:
             pass
+    
+    def visual_group(self):
+        print("Showing visual?")
+        self.visual = Visual()
+    
+    def test_grp_view(self):
+        self.grp_view = Grouping(["asdf", ("1", "2"), "qwer"])
 
 if __name__ == "__main__":
-    # app = QApplication([])
-    # ex = App()
-    # exit(app.exec_())
-    from app.visual_similarity.cluster_similar import group_images
-    res = group_images("data/")
-    
-    for entry in res:
-        print(entry)
+    app = QApplication([])
+    ex = App()
+    exit(app.exec_())
