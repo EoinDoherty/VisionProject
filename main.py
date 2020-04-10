@@ -58,5 +58,7 @@ if __name__ == "__main__":
     # ex = App()
     # exit(app.exec_())
     from app.visual_similarity.cluster_similar import group_images
-    print("hello")
-    print(group_images("data/"))
+    res = group_images("data/")
+    
+    for entry in res:
+        print(entry)

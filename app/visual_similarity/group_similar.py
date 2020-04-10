@@ -1,5 +1,6 @@
 import numpy as np
-from skimage.transform import resize
+# from skimage.transform import resize
+from cv2 import resize
 from skimage.color import gray2rgb
 from app.image_io import load_images
 from collections import defaultdict
@@ -10,9 +11,7 @@ def vectorize(image, width=300, height=300):
     resizing converts uints to floats between 0 and 1
     """
 
-    # Of all the things in this file, this is the bottleneck
-    # TODO: Refactor to use cv2 resize?
-    new_image = resize(image, [height, width])
+    new_image = resize(image, (height, width))
     shape = new_image.shape
 
     if len(shape) == 2:
@@ -25,8 +24,14 @@ def similarity(u, v):
     Find percent similarity [0,1] between 1D vectors u and v
     """
 
-    diffs = np.abs(u - v)
-    return 1 - np.sum(diffs)/u.size
+    ud = u.astype('double')
+    vd = v.astype('double')
+
+    datatype_info = np.iinfo(u.dtype)
+    max_val = datatype_info.max
+
+    percent_diffs = np.abs(ud - vd) / max_val
+    return 1 - np.sum(percent_diffs)/u.size
 
 def group_pairs(pairs):
 
