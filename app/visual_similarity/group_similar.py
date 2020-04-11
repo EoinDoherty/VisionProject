@@ -73,4 +73,11 @@ def group_images(path, threshold=0.8):
                 if j_name in not_grouped:
                     not_grouped.remove(j_name)
     groups = group_pairs(pairs)
-    return list(groups.union(not_grouped))
+    grouping = {}
+
+    i = 1
+    for group in groups:
+        grouping[f"Group {i}"] = group
+    
+    grouping[""] = list(not_grouped)
+    return grouping

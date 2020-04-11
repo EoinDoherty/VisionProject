@@ -23,25 +23,22 @@ class Grouping(QWidget):
         # self.layout.addWidget(list)
         tree = QTreeWidget()
         tree.setColumnCount(2)
-        group_counter = 1
 
-        self.groups.sort(key=lambda x: 0 if type(x) == tuple else 1)
+        for group in self.groups:
+            if group == "":
+                continue
+            
+            header_widget = QTreeWidgetItem(tree)
+            header_widget.setText(0, group)
 
-        for i in range(len(self.groups)):
-            entry = self.groups[i]
-
-            if type(entry) == tuple:
-                header = f"Group {group_counter}"
-                header_widget = QTreeWidgetItem(tree)
-                header_widget.setText(0, header)
-
-                for name in entry:
-                    thing = QTreeWidgetItem(header_widget)
-                    thing.setText(1, name)
-                group_counter += 1
-            else:
+            for name in self.groups[group]:
+                thing = QTreeWidgetItem(header_widget)
+                thing.setText(1, name)
+        
+        if "" in self.groups:
+            for name in self.groups[""]:
                 thing = QTreeWidgetItem(tree)
-                thing.setText(0, str(self.groups[i]))
+                thing.setText(0, name)
 
         self.layout.addWidget(tree)
         self.setLayout(self.layout)
