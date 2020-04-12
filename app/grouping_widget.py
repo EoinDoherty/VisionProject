@@ -29,16 +29,16 @@ class Grouping(QWidget):
                 continue
             
             header_widget = QTreeWidgetItem(tree)
-            header_widget.setText(0, group)
+            header_widget.setText(0, str(group))
 
             for name in self.groups[group]:
                 thing = QTreeWidgetItem(header_widget)
-                thing.setText(1, name)
+                thing.setText(1, str(name))
         
         if "" in self.groups:
             for name in self.groups[""]:
                 thing = QTreeWidgetItem(tree)
-                thing.setText(0, name)
+                thing.setText(0, str(name))
 
         self.layout.addWidget(tree)
         self.setLayout(self.layout)

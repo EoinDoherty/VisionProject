@@ -7,6 +7,7 @@ from skimage import data
 from skimage.io import imread
 from app.visual_similarity.visual_widget import Visual
 from app.grouping_widget import Grouping
+from app.cascades.facial_rec_widget import Facial
 
 class App(QMainWindow):
     def __init__(self):
@@ -43,6 +44,10 @@ class App(QMainWindow):
         test_grp.clicked.connect(self.test_grp_view)
         # self.layout.addWidget(test_grp)
 
+        facial_grp_button = QPushButton("Group using facial recognition")
+        facial_grp_button.clicked.connect(self.facial_group)
+        self.layout.addWidget(facial_grp_button)
+
         self.central_widget = QWidget()
         self.central_widget.setLayout(self.layout)
         self.setCentralWidget(self.central_widget)
@@ -72,6 +77,9 @@ class App(QMainWindow):
     
     def test_grp_view(self):
         self.grp_view = Grouping(["asdf", ("1", "2"), "qwer"])
+    
+    def facial_group(self):
+        self.facial = Facial()
 
 if __name__ == "__main__":
     app = QApplication([])
