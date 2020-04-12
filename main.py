@@ -42,7 +42,7 @@ class App(QMainWindow):
 
         test_grp = QPushButton("Debug grouping view")
         test_grp.clicked.connect(self.test_grp_view)
-        # self.layout.addWidget(test_grp)
+        self.layout.addWidget(test_grp)
 
         facial_grp_button = QPushButton("Group using facial recognition")
         facial_grp_button.clicked.connect(self.facial_group)
@@ -76,7 +76,7 @@ class App(QMainWindow):
         self.visual = Visual()
     
     def test_grp_view(self):
-        self.grp_view = Grouping(["asdf", ("1", "2"), "qwer"])
+        self.grp_view = Grouping({"group 1": ["asdf", "qwe"], "": ["one", "another"]}, "~/github/VisionProject")
     
     def facial_group(self):
         self.facial = Facial()

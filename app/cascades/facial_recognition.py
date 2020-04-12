@@ -38,7 +38,7 @@ def group_faces_count(faces, names):
     groups = {}
 
     for i in range(len(faces)):
-        count = len(faces[i])
+        count = str(len(faces[i]))
         
         if count in groups:
             groups[count].append(names[i])

@@ -18,6 +18,7 @@ class External(QThread):
     def run(self):
         for i in range(len(self.images)):
             self.count_changed.emit(i)
+            print(i)
             self.faces.append(detect_face(self.images[i]))
         self.thread_exit.emit(i+1)
 
@@ -102,7 +103,7 @@ class Facial(QMainWindow):
         count_button.clicked.connect(self.count_group)
         self.post_processing_layout.addWidget(count_button)
 
-        binary_button = QPushButton("Group by presence of faces (2 groups)")
+        binary_button = QPushButton("Find portraits")
         binary_button.clicked.connect(self.binary_group)
         self.post_processing_layout.addWidget(binary_button)
 
@@ -111,12 +112,12 @@ class Facial(QMainWindow):
         self.setCentralWidget(self.central_widget)
     
     def count_group(self):
-        grouping = Grouping(group_faces_count(self.faces, self.names))
+        grouping = Grouping(group_faces_count(self.faces, self.names), self.image_path)
         self.central_widget = grouping
         self.setCentralWidget(grouping)
     
     def binary_group(self):
-        grouping = Grouping(group_faces_binary(self.faces, self.names))
+        grouping = Grouping(group_faces_binary(self.faces, self.names), self.image_path)
         self.central_widget = grouping
         self.setCentralWidget(grouping)
 

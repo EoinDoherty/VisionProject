@@ -34,7 +34,7 @@ class Visual(QMainWindow):
             return
 
         groups = group_images(image_path)
-        grouping = Grouping(groups)
+        grouping = Grouping(groups, image_path)
         self.central_widget = grouping
         self.setCentralWidget(grouping)
 
