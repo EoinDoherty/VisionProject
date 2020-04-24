@@ -130,9 +130,10 @@ dmypy.json
 
 # Image folder
 images/
-data/
+/data
 
 # Misc
 .vscode/
 S20_CSCI48305722_FinalProject.pdf
 .DS_Store
+yolov3.weights
