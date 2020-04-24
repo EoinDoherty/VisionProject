@@ -99,9 +99,9 @@ class ObjectWidget(QMainWindow):
         self.progress_bar.setValue(value)
         classifications = self.calc.get_classifications()
 
-        print(self.names)
-        print(len(self.names), len(classifications))
-        print(classifications)
+        # print(self.names)
+        # print(len(self.names), len(classifications))
+        # print(classifications)
         final_group = self.processor.group_labels(classifications, self.names)
         grouping = Grouping(final_group, self.image_path)
         self.central_widget = grouping

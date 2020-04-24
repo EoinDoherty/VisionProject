@@ -21,22 +21,13 @@ class App(QMainWindow):
         self.height = 500
         self.initUI()
         self.show()
-        self.image = data.astronaut()
     
     def initUI(self):
         self.layout = QVBoxLayout()
-
-        image_button = QPushButton("Show image")
-        image_button.clicked.connect(self.show_image)
-        # self.layout.addWidget(image_button)
         
         print_button = QPushButton("Print text")
         print_button.clicked.connect(lambda : print("clicked button"))
         # self.layout.addWidget(print_button)
-
-        file_nav_button = QPushButton("Select Image")
-        file_nav_button.clicked.connect(self.file_nav)
-        # self.layout.addWidget(file_nav_button)
 
         visual_grp_button = QPushButton("Group by visual features")
         visual_grp_button.clicked.connect(self.visual_group)
@@ -63,26 +54,8 @@ class App(QMainWindow):
         self.setCentralWidget(self.central_widget)
         # self.setCentralWidget(self.layout)
     
-    def show_image(self):
-        plt.imshow(self.image)
-        plt.show()
-    
-    def file_nav(self):
-        # file_dialog = QFileDialog(self)
-        # file_dialog.setViewMode(QFileDialog.Detail)
-
-        # if file_dialog.exec_():
-        #     print(file_dialog.selectedFiles())
-
-        # print(QFileDialog.getOpenFileNames(self, "select files", getcwd()))
-        image_path, _ = QFileDialog.getOpenFileName(self, "Find a file", getcwd(), "Image files (*png *jpg *jpeg)")
-        try:
-            self.image = imread(image_path)
-        except ValueError:
-            pass
-    
     def visual_group(self):
-        print("Showing visual?")
+        # print("Showing visual?")
         self.visual = Visual()
     
     def test_grp_view(self):

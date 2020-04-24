@@ -1,0 +1,10 @@
+name: dohertyCV
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - opencv >= 3.4.2
+  - pyqt >= 5.9.2
+  - numpy
+  - scikit-image
+  - matplotlib

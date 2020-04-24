@@ -18,7 +18,7 @@ class External(QThread):
     def run(self):
         for i in range(len(self.images)):
             self.count_changed.emit(i)
-            print(i)
+            # print(i)
             self.faces.append(detect_face(self.images[i]))
         self.thread_exit.emit(i+1)
 
@@ -95,7 +95,7 @@ class Facial(QMainWindow):
     def on_thread_exit(self, value):
         self.progress_bar.setValue(value)
         self.faces = self.calc.get_faces()
-        print(self.faces)
+        # print(self.faces)
         
         self.post_processing_layout = QVBoxLayout()
 

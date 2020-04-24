@@ -1,5 +1,4 @@
 import numpy as np
-# from skimage.transform import resize
 from cv2 import resize
 from skimage.color import gray2rgb
 from app.image_io import load_images

@@ -1,6 +1,5 @@
 import os
 import shutil
-# from skimage.io import imread
 from cv2 import imread, IMREAD_COLOR
 
 def format_dir(name):
