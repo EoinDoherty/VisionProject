@@ -5,7 +5,9 @@ Image sorter final project for CSCI 5722: Computer Vision
 
 ## Installing
 
-Dependencies:
+Github will not let me upload the object detection weights file. To configure object detection, download the weights file from [https://pjreddie.com/media/files/yolov3.weights](https://pjreddie.com/media/files/yolov3.weights) and put yolov3.weights in app/object_similarity/data. Or edit the config and weight paths in `object_detection.py` to use the `yolov3-tiny` versions (performance will be worse with these).
+
+Python Dependencies:
 * Python 3.7
 * PytQt5 (GUI library)
 * opencv (python library version 3.4.2 or above) (most of the image processing)
