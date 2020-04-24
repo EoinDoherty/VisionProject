@@ -8,6 +8,8 @@ from skimage.io import imread
 from app.visual_similarity.visual_widget import Visual
 from app.grouping_widget import Grouping
 from app.cascades.facial_rec_widget import Facial
+from app.object_similarity.object_widget import ObjectWidget
+from app.feature_similarity.feature_widget import FeatureWidget
 
 class App(QMainWindow):
     def __init__(self):
@@ -26,15 +28,15 @@ class App(QMainWindow):
 
         image_button = QPushButton("Show image")
         image_button.clicked.connect(self.show_image)
-        self.layout.addWidget(image_button)
+        # self.layout.addWidget(image_button)
         
         print_button = QPushButton("Print text")
         print_button.clicked.connect(lambda : print("clicked button"))
-        self.layout.addWidget(print_button)
+        # self.layout.addWidget(print_button)
 
         file_nav_button = QPushButton("Select Image")
         file_nav_button.clicked.connect(self.file_nav)
-        self.layout.addWidget(file_nav_button)
+        # self.layout.addWidget(file_nav_button)
 
         visual_grp_button = QPushButton("Group by visual features")
         visual_grp_button.clicked.connect(self.visual_group)
@@ -42,11 +44,19 @@ class App(QMainWindow):
 
         test_grp = QPushButton("Debug grouping view")
         test_grp.clicked.connect(self.test_grp_view)
-        self.layout.addWidget(test_grp)
+        # self.layout.addWidget(test_grp)
 
         facial_grp_button = QPushButton("Group using facial recognition")
         facial_grp_button.clicked.connect(self.facial_group)
         self.layout.addWidget(facial_grp_button)
+
+        object_grp_button = QPushButton("Group using object recognition")
+        object_grp_button.clicked.connect(self.object_group)
+        self.layout.addWidget(object_grp_button)
+
+        feat_grp_button = QPushButton("Group using SIFT feature comparison (very slow)")
+        feat_grp_button.clicked.connect(self.feature_group)
+        self.layout.addWidget(feat_grp_button)
 
         self.central_widget = QWidget()
         self.central_widget.setLayout(self.layout)
@@ -80,6 +90,12 @@ class App(QMainWindow):
     
     def facial_group(self):
         self.facial = Facial()
+    
+    def object_group(self):
+        self.object = ObjectWidget()
+    
+    def feature_group(self):
+        self.feature = FeatureWidget()
 
 if __name__ == "__main__":
     app = QApplication([])

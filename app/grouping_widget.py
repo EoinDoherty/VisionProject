@@ -59,7 +59,7 @@ class Grouping(QWidget):
 
         self.layout.addWidget(tree)
 
-        save_btn = QPushButton("Save")
+        save_btn = QPushButton("Save grouping to disk")
         save_btn.clicked.connect(self.save_grouping)
         self.layout.addWidget(save_btn)
 
